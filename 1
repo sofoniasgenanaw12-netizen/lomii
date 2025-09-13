@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Digital Business Card</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #0F8251, #1e9261, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Abstract background shapes for visual interest */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 150%;
+            filter: blur(200px);
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -50%;
+            width: 60%;
+            height: 60%;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 150%;
+            filter: blur(200px);
+            z-index: 0;
+        }
+
+        .card-container {
+            /* Main card properties */
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3); /* Deeper, more pronounced shadow */
+            width: 90%;
+            max-width: 400px;
+            padding: 32px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            /* Animation for subtle movement */
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* Keyframes for the floating animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Green and black corner gradient - More dynamic */
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -200px;
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, #0F8251, #000); /* Radial gradient for a more "glow" effect */
+            border-bottom-left-radius: 100%;
+            z-index: -100; /* Place it behind the card's content */
+            opacity: 0.9;
+            filter: blur(20px); /* Increased blur for a softer glow */
+            transform: rotate(-45deg); /* Rotate for a more angular look */
+        }
+
+        /* White and green curved divider - Now with a softer curve and shadow */
+        .card-container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 10px; /* FIXED: Added 'px' unit */
+            width: 10%;
+            height: 10px;
+            background-color: #fff; /* Solid green for a bold accent */
+            clip-path: ellipse(100% 70% at 50% 100%);
+            opacity: 1;
+            z-index: 0; /* Behind the main content but above the background */
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2); /* A shadow to separate it from the card */
+        }
+
+        /* New: A white accent element in the top left corner */
+        .card-container .corner-accent {
+            position: absolute;
+            top: 10px; /* FIXED: Added 'px' unit */
+            left: 100px; /* FIXED: Added 'px' unit */
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            clip-path: ellipse(300% 300% at 150% 50%);
+            opacity: 0.9;
+            z-index: -10;
+            filter: blur(10px);
+        }
+
+        /* New: Company Logo Container */
+        .company-logo-container {
+            margin-bottom: 50px;
+        }
+
+        .company-logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .profile-pic-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 4px solid #0F8251;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-pic-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+            color: #ffff;
+        }
+
+        .title {
+            font-size: 17px;
+            color: #389; /* FIXED: Added semicolon */
+            margin-top: 6px;
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin-top: 28px;
+        }
+
+        .contact-info li {
+            margin-bottom: 18px;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+            color: #ffff;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            transition: color 0.2s ease;
+        }
+
+        .contact-info a:hover {
+            color: #899;
+            text-decoration: underline;
+        }
+
+        .contact-info a .icon {
+            font-size: 22px;
+            margin-right: 10px;
+        }
+
+        .social-links {
+            margin-top: 36px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .social-links .linkedin {
+            background-color: #0077b5;
+        }
+
+        .social-links .twitter {
+            background-color: #1da1f2;
+        }
+
+        .social-links .telegram {
+            background-color: #0088cc;
+        }
+
+        .social-links .facebook {
+            background-color: #3b5998;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .cta-buttons a {
+            text-decoration: none;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 8px;
+            display: block;
+            font-size: 17px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .cta-buttons a:hover {
+            transform: translateY(-3px);
+        }
+
+        .cta-buttons .save-contact {
+            background-color: #0F8251;
+            color: #fff;
+        }
+
+        .cta-buttons .save-contact:hover {
+            background-color: #14a067;
+        }
+
+        .cta-buttons .share-link {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .cta-buttons .share-link:hover {
+            background-color: #555;
+        }
+
+        .cta-buttons .download-card {
+            background-color: #0F8251;
+            color: #fff;
+            border: none;
+        }
+
+        .cta-buttons .download-card:hover {
+            background-color: #14a067;
+        }
+
+        .qr-code-section {
+            margin-top: 32px;
+            text-align: center;
+            display: none;
+        }
+
+        .qr-code-section h2 {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        #qrcode {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            border: 6px solid #f0f2f5;
+            border-radius: 8px;
+        }
+
+        #qrcode img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="card-container">
+        <div class="corner-accent"></div>
+        <div class="company-logo-container">
+            <img src="https://via.placeholder.com/150x50.png?text=Company+Logo" alt="Company Logo">
+        </div>
+        <div class="profile-pic-container">
+            <img src="https://via.placeholder.com/120" alt="Profile Picture">
+        </div>
+
+        <h1>Sofonias Genanaw</h1>
+        <p class="title">CEO</p>
+        <p class="title">Hosea Real Estate</p>
+
+        <ul class="contact-info">
+            <li>
+                <a href="tel:+251920508303">
+                    📞 <span class="text-content">+251920508303</span>
+                </a>
+            </li>
+            <li>
+                <a href="mailto:Sofoniasgenanaw12@gmail.com">
+                    ✉️ <span class="text-content">Sofoniasgenanaw12@gmail.com</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://SofoniasG.com" target="_blank">
+                    🌐 <span class="text-content">SofoniasG.com</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="social-links">
+            <a href="https://linkedin.com/in/sofonias-Genanaw" class="linkedin" target="_blank" title="LinkedIn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+            </a>
+            <a href="https://twitter.com/yourusername" class="twitter" target="_blank" title="Twitter">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.585 0-6.494 2.91-6.494 6.494 0 .509.058 1.004.167 1.483-5.391-.27-10.16-2.868-13.354-6.83-1.07 1.849-1.685 4.008-1.685 6.304 0 4.484 2.296 8.169 5.426 9.83-1.89-.056-3.665-.584-5.213-1.442-.006.056-.006.113-.006.17 0 3.109 2.219 5.703 5.149 6.294-.543.148-1.114.225-1.701.225-.417 0-.82-.04-1.215-.115.819 2.559 3.193 4.42 6.001 4.471-2.28 1.785-5.148 2.846-8.283 2.846-.539 0-1.071-.032-1.59-.092 2.972 1.896 6.494 3.001 10.288 3.001 12.339 0 19.034-10.279 19.034-19.034 0-.29-.006-.58-.018-.868.995-.722 1.868-1.624 2.567-2.659z" />
+                </svg>
+            </a>
+            <a href="https://t.me/lomi_legacy" class="telegram" target="_blank" title="Telegram">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.816 16.591c-.551.332-1.018.172-1.353-.559l-2.028-6.19c-.276-.84.237-1.163 1.054-.874l13.195 4.887c.808.31 1.055.772.846 1.487l-2.651 8.24c-.256.796-.799.992-1.479.593l-4.223-3.105c-.47-.346-.902-.45-.902-.916v-2.188c0-.622.282-1.096 1.423-1.956l.332-.239c.278-.173.578-.362.593-.728.016-.367-.282-.601-.593-.687-.367-.105-.72-.119-1.066-.089l-2.193.364c-.752.124-1.298.502-1.893 1.155l-.895 1.002-3.149.522c-.636.105-.989.261-.989.431 0 .22.259.39.816.586l3.414 1.343.332.164.673.332c.593.282.887.49.887.896v.975c0 .355-.178.68-.426.837-.156.096-.341.139-.569.139-.247 0-.469-.047-.645-.145z" />
+                </svg>
+            </a>
+            <a href="https://facebook.com/lomi.legacy" class="facebook" target="_blank" title="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                    <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.35c0 .732.593 1.325 1.325 1.325h11.492v-8.776h-2.934v-3.869h2.934v-2.867c0-2.906 1.77-4.485 4.364-4.485 1.229 0 2.274.092 2.583.133v2.982h-1.742c-1.362 0-1.625.647-1.625 1.594v2.099h3.29l-.53 3.869h-2.76v8.776h5.815c.732 0 1.325-.593 1.325-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                </svg>
+            </a>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="javascript:void(0)" class="save-contact" onclick="saveVCard()">Save Contact</a>
+            <a href="javascript:void(0)" class="share-link" onclick="shareCard()">Share Card</a>
+            <button class="download-card" id="downloadButton">Download Card Image</button>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Placeholder functions for other buttons
+        function saveVCard() {
+            alert('VCard save functionality not implemented yet.');
+        }
+
+        function shareCard() {
+            alert('Card sharing functionality not implemented yet.');
+        }
+
+        // --- NEW CODE FOR DOWNLOAD FUNCTIONALITY ---
+        function downloadCardImage() {
+            const card = document.querySelector('.card-container');
+            const filename = 'Sofonias_Genanaw_Card.png';
+
+            html2canvas(card).then(canvas => {
+                const image = canvas.toDataURL('image/png', 1.0);
+
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = image;
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+
+        // Attach the download function to the button's click event
+        document.getElementById('downloadButton').addEventListener('click', downloadCardImage);
+    </script>
+</body>
+</html>
