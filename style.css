@@ -1,0 +1,304 @@
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #0F8251, #1e9261, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Abstract background shapes for visual interest */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 150%;
+            filter: blur(200px);
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -50%;
+            width: 60%;
+            height: 60%;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 150%;
+            filter: blur(200px);
+            z-index: 0;
+        }
+
+        .card-container {
+            /* Main card properties */
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3); /* Deeper, more pronounced shadow */
+            width: 90%;
+            max-width: 400px;
+            padding: 32px;
+            text-align: center;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            /* Animation for subtle movement */
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* Keyframes for the floating animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        /* Green and black corner gradient - More dynamic */
+        .card-container::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -200px;
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, #0F8251, #000); /* Radial gradient for a more "glow" effect */
+            border-bottom-left-radius: 100%;
+            z-index: -100; /* Place it behind the card's content */
+            opacity: 0.9;
+            filter: blur(20px); /* Increased blur for a softer glow */
+            transform: rotate(-45deg); /* Rotate for a more angular look */
+        }
+
+        /* White and green curved divider - Now with a softer curve and shadow */
+        .card-container::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 10;
+            width: 10%;
+            height: 10px;
+            background-color: #fff; /* Solid green for a bold accent */
+            clip-path: ellipse(100% 70% at 50% 100%);
+            opacity: 1;
+            z-index: 0; /* Behind the main content but above the background */
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.2); /* A shadow to separate it from the card */
+        }
+
+        /* New: A white accent element in the top left corner */
+        .card-container .corner-accent {
+            position: absolute;
+            top: 10;
+            left: 100;
+            width: 60px;
+            height: 60px;
+            background-color: #fff;
+            clip-path: ellipse(300% 300% at 150% 50%);
+            opacity: 0.9;
+            z-index: -10;
+            filter: blur(10px);
+        }
+
+        /* New: Company Logo Container */
+        .company-logo-container {
+            margin-bottom: 50px;
+        }
+
+        .company-logo-container img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .profile-pic-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 4px solid #0F8251;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-pic-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+            color: #ffff;
+        }
+
+        .title {
+            font-size: 17px;
+            color: #ffff;
+            margin-top: 6px;
+        }
+
+        .contact-info {
+            list-style: none;
+            padding: 0;
+            margin-top: 28px;
+        }
+
+        .contact-info li {
+            margin-bottom: 18px;
+        }
+
+        .contact-info a {
+            text-decoration: none;
+            color: #ffff;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            transition: color 0.2s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffff;;
+            text-decoration: underline;
+        }
+
+        .contact-info a .icon {
+            font-size: 22px;
+            margin-right: 10px;
+        }
+
+        .social-links {
+            margin-top: 36px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        .social-links .linkedin {
+            background-color: #0077b5;
+        }
+
+        .social-links .twitter {
+            background-color: #1da1f2;
+        }
+
+        .social-links .telegram {
+            background-color: #0088cc;
+        }
+
+        .social-links .facebook {
+            background-color: #3b5998;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .cta-buttons a {
+            text-decoration: none;
+            font-weight: 600;
+            padding: 14px 28px;
+            border-radius: 8px;
+            display: block;
+            font-size: 17px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .cta-buttons a:hover {
+            transform: translateY(-3px);
+        }
+
+        .cta-buttons .save-contact {
+            background-color: #0F8251;
+            color: #fff;
+        }
+
+        .cta-buttons .save-contact:hover {
+            background-color: #14a067;
+        }
+
+        .cta-buttons .share-link {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .cta-buttons .share-link:hover {
+            background-color: #555;
+        }
+
+        .cta-buttons .download-card {
+            background-color: #0F8251;
+            color: #fff;
+            border: none;
+        }
+
+        .cta-buttons .download-card:hover {
+            background-color: #14a067;
+        }
+
+        .qr-code-section {
+            margin-top: 32px;
+            text-align: center;
+            display: none;
+        }
+
+        .qr-code-section h2 {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        #qrcode {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            border: 6px solid #f0f2f5;
+            border-radius: 8px;
+        }
+
+        #qrcode img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
